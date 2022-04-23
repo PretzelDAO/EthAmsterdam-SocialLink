@@ -30,7 +30,9 @@ export default function BotCheck() {
       <div className="min-w-md max-w-[80vw] rounded-md overflow-hidden shadow-2xl w-5/6 m-2 bg-white flex flex-col items-start py-3 font-light px-4">
         <span className="py-3 text-lg">Bot: SocialLink#1224</span>
         <div className="font-light py-3">
-          Please enter your on-chain Profile:
+          {global.profileId
+            ? `Your on-chain Profile: ${global.profile[3]} (${global.profileId})`
+            : 'Please enter your on-chain Profile'}
         </div>
         {toshow}
       </div>
