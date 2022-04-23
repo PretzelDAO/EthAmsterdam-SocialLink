@@ -44,7 +44,7 @@ export default function CreateProfileModal({ publication }) {
   async function submitProfile() {
     try {
       setLoading(true)
-      const prof = await createProfile(handle, image.raw, global.user?.address)
+      const prof = await createProfile(handle.toLowerCase(), image.raw, global.user?.address)
       if (prof) {
         const claimed = await getProfileIdFromHandle(handle)
         if (!claimed) {
