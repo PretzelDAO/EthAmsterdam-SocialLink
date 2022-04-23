@@ -1,32 +1,40 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Header from "../components/Header";
-import UserContext from "../contexts/UserContext";
-import "../styles/globals.css";
-import styles from "../styles/Home.module.css";
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Header from '../components/Header'
+import UserContext from '../contexts/UserContext'
+import '../styles/globals.css'
+import styles from '../styles/Home.module.css'
 
 function MyApp({ Component, pageProps }) {
   const [state, setState] = useState({
     user: null,
     profileId: null,
     update,
-  });
+  })
   function update(data) {
-    let updateData = data;
+    let updateData = data
     Object.keys(state).forEach(function (key) {
       if (key in data) {
         // or obj1.hasOwnProperty(key)
-        updateData[key] = data[key];
+        updateData[key] = data[key]
       } else {
-        updateData[key] = state[key];
+        updateData[key] = state[key]
       }
-    });
-    console.log("updating state", updateData, state, data);
-    setState(Object.assign({}, state, updateData));
+    })
+    console.log('updating state', updateData, state, data)
+    setState(Object.assign({}, state, updateData))
   }
   useEffect(() => {
     // import('tw-elements')
-  }, []);
+    // const user = localStorage.getItem('user')
+    const profileId = localStorage.getItem('profileId')
+    const profile = localStorage.getItem('profile')
+    console.log('user logged in', profileId)
+
+    if (profileId) {
+      update({ user, profileId, profile })
+    }
+  }, [])
 
   return (
     <UserContext.Provider value={state}>
@@ -55,12 +63,12 @@ function MyApp({ Component, pageProps }) {
             >
               Powered by PretzelDAO
             </a>
-            <img src={"/images/pretzel-color.svg"} className="h-8" />
+            <img src={'/images/pretzel-color.svg'} className="h-8" />
           </footer>
         </div>
       </div>
     </UserContext.Provider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
