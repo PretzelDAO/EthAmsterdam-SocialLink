@@ -4,6 +4,7 @@ import { LENSHUB_ABI } from './abi/LENSHUB_ABI'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 export const contract_address = '0x03dE2c5Dd914a1D8F94D57741D531874D30F5299'
+const sharedAccountContract = '0xe240C29dba4Cc71Bc1206093c4a8E1B216f7f7bb'
 export const tryContract = async () => {
   console.log(LENSHUB_ABI)
   console.log(window.web3)
@@ -63,6 +64,36 @@ export const getProfileIdFromHandle = async (handle) => {
 }
 
 export const getProfileById = async (id) => {
+  const contract = getWeb3Contract(sharedAccountContract, LENSHUB_ABI)
+  try {
+    const profile = await contract.methods.getProfile(id).call()
+    console.log('got ', profile, ' for', id)
+    if (profile == 0) return null
+    return profile
+  } catch (e) {
+    console.log('cannot handle', handle)
+    return null
+  }
+}
+
+export const getProfilesFromAddress = async (owner) => {
+  const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
+
+  const totalProfiles = await contract.methods.balanceOf(owner).call()
+
+  const promises = []
+
+  for (let i = 0; i < totalProfiles; i++) {
+    const p = contract.methods.tokenOfOwnerByIndex(owner, i).call()
+    promises.push(p)
+  }
+
+  const allProfiles = await Promise.all(promises)
+
+  return allProfiles
+}
+
+export const getTwitterForProfileId = async (id) => {
   const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
   try {
     const profile = await contract.methods.getProfile(id).call()
@@ -117,11 +148,10 @@ export const createProfile = async (handle, image, userAddress) => {
         followModule: ZERO_ADDRESS,
         followModuleData: [],
         followNFTURI: 'https://ipfs.infura.io/ipfs/' + imagepath,
-
       })
-      .send({ 
-        from: userAddress, 
-        gasPrice: Math.floor(gasfee * 5)
+      .send({
+        from: userAddress,
+        gasPrice: Math.floor(gasfee * 5),
       })
 
     // const profile = await contract.methods.ownerOf(0).call()

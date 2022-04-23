@@ -13,6 +13,7 @@ export default function ConnectProfile() {
   const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const global = useContext(UserContext)
+  // const [profiles, setProfiles] = useState()
   function closeModal() {
     setIsOpen(false)
   }
@@ -21,6 +22,15 @@ export default function ConnectProfile() {
     setIsOpen(true)
   }
 
+  // useContext(
+  //   {
+
+  //   },[]
+  // )
+  let profiles = []
+  if (global.user) {
+    getProfileById()
+  }
   async function claimHandle() {
     try {
       setLoading(true)
