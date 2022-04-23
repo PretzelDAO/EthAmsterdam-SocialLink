@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
     console.log('user logged in', profileId)
 
     if (profileId) {
-      update({ user, profileId, profile })
+      update({ profileId, profile: JSON.parse(profile) })
     }
   }, [])
 

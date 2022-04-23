@@ -1,42 +1,44 @@
-import { Dialog, Transition } from "@headlessui/react";
-import Script from "next/script";
-import { Fragment, useContext, useEffect, useState } from "react";
-import UserContext from "../contexts/UserContext";
-import { publication } from "../mockdata/mock_publication";
-import { getProfileById, getProfileIdFromHandle } from "../utils/chain_utils";
-import BLPButton from "./Button";
-import SocialComps from "./SocialComps";
+import { Dialog, Transition } from '@headlessui/react'
+import Script from 'next/script'
+import { Fragment, useContext, useEffect, useState } from 'react'
+import UserContext from '../contexts/UserContext'
+import { publication } from '../mockdata/mock_publication'
+import { getProfileById, getProfileIdFromHandle } from '../utils/chain_utils'
+import BLPButton from './Button'
+import SocialComps from './SocialComps'
 
 export default function ConnectProfile() {
-  let [isOpen, setIsOpen] = useState(false);
-  const [handle, setHandle] = useState();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
-  const global = useContext(UserContext);
+  let [isOpen, setIsOpen] = useState(false)
+  const [handle, setHandle] = useState()
+  const [error, setError] = useState()
+  const [loading, setLoading] = useState(false)
+  const global = useContext(UserContext)
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   async function claimHandle() {
     try {
-      setLoading(true);
-      const claimed = await getProfileIdFromHandle(handle);
+      setLoading(true)
+      const claimed = await getProfileIdFromHandle(handle)
       if (!claimed) {
-        setError("Handle not existent!");
+        setError('Handle not existent!')
       }
       if (claimed) {
-        setError("Claimed profile:" + claimed);
-        const profile = await getProfileById(claimed);
-        global.update({ profile, profileId: claimed, user: global.user });
-        setTimeout(() => closeModal(), 2000);
+        setError('Claimed profile:' + claimed)
+        const profile = await getProfileById(claimed)
+        global.update({ profile, profileId: claimed, user: global.user })
+        setTimeout(() => closeModal(), 2000)
+        localStorage.setItem('profileId', claimed)
+        localStorage.setItem('profile', JSON.stringify(profile))
       }
-      console.log("claiming,", handle, claimed);
+      console.log('claiming,', handle, claimed)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -125,9 +127,9 @@ export default function ConnectProfile() {
                     <div className="w-8 h-8 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
                   ) : (
                     <BLPButton
-                      text={"Connect"}
+                      text={'Connect'}
                       clickaction={claimHandle}
-                      className={"min-w-[20%]"}
+                      className={'min-w-[20%]'}
                     />
                   )}
                 </div>
@@ -150,5 +152,5 @@ export default function ConnectProfile() {
         </Dialog>
       </Transition>
     </>
-  );
+  )
 }

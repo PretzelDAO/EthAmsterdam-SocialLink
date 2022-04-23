@@ -101,6 +101,20 @@ export const removeWalletPreferenceFromLocalStorage = () => {
 
 export const requestUserLogin = async (global) => {
   let user = await loginWithBlockNative()
-  if (user) global.update({ user: { address: user.address } })
+  if (user) {
+    const profileId = localStorage.getItem('profileId')
+    const profile = localStorage.getItem('profile')
+    console.log('user logged in', profileId)
+
+    if (profileId) {
+      global.update({
+        user: { address: user.address },
+        profileId,
+        profile: JSON.parse(profile),
+      })
+    } else {
+      global.update({ user: { address: user.address } })
+    }
+  }
   // router.reload()
 }

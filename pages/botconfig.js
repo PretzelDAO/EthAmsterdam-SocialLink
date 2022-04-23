@@ -1,19 +1,19 @@
-import { useContext, useState } from "react";
-import BotConnect from "../components/BotConnect";
-import ConnectButton from "../components/ConnectButton";
-import ConnectProfile from "../components/ConnectProfile";
-import CreateProfileModal from "../components/CreateProfileModal";
-import UserContext from "../contexts/UserContext";
+import { useContext, useState } from 'react'
+import BotConnect from '../components/BotConnect'
+import ConnectButton from '../components/ConnectButton'
+import ConnectProfile from '../components/ConnectProfile'
+import CreateProfileModal from '../components/CreateProfileModal'
+import UserContext from '../contexts/UserContext'
 
 export default function BotCheck() {
   // const [handle, setHandle] = useState()
-  const global = useContext(UserContext);
+  const global = useContext(UserContext)
   // const history = useHistory();
-  let toshow;
+  let toshow
   if (global.profileId) {
-    console.log("logged in");
+    console.log('logged in')
     // history.push('/')
-    toshow = <BotConnect />;
+    toshow = <BotConnect />
   } else {
     toshow = global.user ? (
       <div className="flex flex-row ">
@@ -22,7 +22,7 @@ export default function BotCheck() {
       </div>
     ) : (
       <ConnectButton />
-    );
+    )
   }
 
   return (
@@ -44,12 +44,14 @@ export default function BotCheck() {
       >
         <span className="py-3 text-lg">Bot: SocialLink#1224</span>
         <div className="font-light py-3">
-          {global.profileId
-            ? `Your on-chain Profile: ${global.profile[3]} (${global.profileId})`
-            : 'Please enter your on-chain Profile'}
+          {global.profileId ? (
+            <span>{`Your on-chain Profile: ${global.profile[3]} (${global.profileId})`}</span>
+          ) : (
+            'Please enter your on-chain Profile'
+          )}
         </div>
         {toshow}
       </div>
     </div>
-  );
+  )
 }
