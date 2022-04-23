@@ -1,9 +1,13 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Header from '../components/Header'
 import UserContext from '../contexts/UserContext'
 import '../styles/globals.css'
 import styles from '../styles/Home.module.css'
+import {
+  getUserFromWalletWithPreference,
+  requestUserLogin,
+} from '../utils/auth'
 
 function MyApp({ Component, pageProps }) {
   const [state, setState] = useState({
@@ -24,16 +28,20 @@ function MyApp({ Component, pageProps }) {
     console.log('updating state', updateData, state, data)
     setState(Object.assign({}, state, updateData))
   }
+  const global = useContext(UserContext)
   useEffect(() => {
     // import('tw-elements')
     // const user = localStorage.getItem('user')
-    const profileId = localStorage.getItem('profileId')
-    const profile = localStorage.getItem('profile')
-    console.log('user logged in', profileId)
-
-    if (profileId) {
-      update({ profileId, profile: JSON.parse(profile) })
+    if (!global.user) {
+      getUserFromWalletWithPreference()
     }
+    // const profileId = localStorage.getItem('profileId')
+    // const profile = localStorage.getItem('profile')
+    // console.log('user logged in', profileId)
+
+    // if (profileId) {
+    //   update({ profileId, profile: JSON.parse(profile) })
+    // }
   }, [])
 
   return (

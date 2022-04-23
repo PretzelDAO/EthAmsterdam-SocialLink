@@ -48,6 +48,7 @@ export async function loginWithBlockNative(preference) {
   console.log('Setting address', currentState.address)
   let user = { address: currentState.address }
   localStorage.setItem('user', user)
+
   return user
 }
 
@@ -116,5 +117,6 @@ export const requestUserLogin = async (global) => {
       global.update({ user: { address: user.address } })
     }
   }
-  // router.reload()
+  return user
 }
+// router.reload()

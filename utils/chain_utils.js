@@ -3,14 +3,11 @@ import { create } from 'ipfs-http-client'
 import { LENSHUB_ABI } from './abi/LENSHUB_ABI'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
-export const contract_address = '0xC0fe412c86Eb59A3639D461aF26297f3B91CBE72'
+export const contract_address = '0x03dE2c5Dd914a1D8F94D57741D531874D30F5299'
 export const tryContract = async () => {
   console.log(LENSHUB_ABI)
   console.log(window.web3)
-  const contract = getWeb3Contract(
-    '0xC0fe412c86Eb59A3639D461aF26297f3B91CBE72',
-    LENSHUB_ABI,
-  )
+  const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
   const result = await contract.methods
     .isProfileCreatorWhitelisted('0x189B4e1c7a1733fa8563DCC8e22231D85D8D88D8')
     .call()
@@ -78,6 +75,24 @@ export const getProfileById = async (id) => {
   }
 }
 
+export const setProfileLensDispatcher = async (id, address, userAddress) => {
+  const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
+  try {
+    const gasprice = await window.web3.eth.getGasPrice()
+    console.log('contract', address, id, gasprice)
+    const response = await contract.methods
+      .setDispatcher(id, address)
+      .send({ from: userAddress, gasPrice: Math.floor(gasprice * 2) })
+    console.log('got ', response, ' for', id)
+    console.log('dispatcher set')
+    // if (response == 0) return null
+    // return response
+  } catch (e) {
+    console.log('cannot set dispatcher', id, address, e.message)
+    return null
+  }
+}
+
 export const createProfile = async (handle, image, userAddress) => {
   const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
   let imagepath
@@ -91,6 +106,9 @@ export const createProfile = async (handle, image, userAddress) => {
     return null
   }
   try {
+    const gasfee = await window.web3.eth.getGasPrice()
+    console.log('contract', userAddress, gasfee)
+
     const profile = await contract.methods
       .createProfile({
         to: userAddress,
@@ -100,7 +118,7 @@ export const createProfile = async (handle, image, userAddress) => {
         followModuleData: [],
         followNFTURI: 'https://ipfs.infura.io/ipfs/' + imagepath,
       })
-      .send({ from: userAddress })
+      .send({ from: userAddress, gasPrice: Math.floor(gasfee * 1.2) })
 
     // const profile = await contract.methods.ownerOf(0).call()
 

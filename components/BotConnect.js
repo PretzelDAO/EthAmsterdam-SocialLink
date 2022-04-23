@@ -13,7 +13,7 @@ export default function BotConnect() {
             icon={
               <img src="/images/twittericon.png" className="mx-auto h-16" />
             }
-            link="https://twitter.com/i/oauth2/authorize?response_type=code&client_id=U3RrNDJpRDlKandnX1A5S2FTSDU6MTpjaQ&redirect_uri=https://lfgrow.eurotellogence.de&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenger&code_challenge_method=plain"
+            link="https://twitter.com/i/oauth2/authorize?response_type=code&client_id=U3RrNDJpRDlKandnX1A5S2FTSDU6MTpjaQ&redirect_uri=https://lfgrow.eurotellogence.de/connectbot&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenger&code_challenge_method=plain"
           />
         ) : (
           <div className="pt-2 mb-5 text-gray-400">No connections</div>
@@ -25,7 +25,7 @@ export default function BotConnect() {
               icon={
                 <img src="/images/twittericon.png" className="mx-auto h-16" />
               }
-              link="https://twitter.com/i/oauth2/authorize?response_type=code&client_id=U3RrNDJpRDlKandnX1A5S2FTSDU6MTpjaQ&redirect_uri=https://lfgrow.eurotellogence.de&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenger&code_challenge_method=plain"
+              link="https://twitter.com/i/oauth2/authorize?response_type=code&client_id=U3RrNDJpRDlKandnX1A5S2FTSDU6MTpjaQ&redirect_uri=https://lfgrow.eurotellogence.de/connectbot&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenger&code_challenge_method=plain"
             />
           ) : (
             <div className="pt-2 mb-5 text-gray-400">
