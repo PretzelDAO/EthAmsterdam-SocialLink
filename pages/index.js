@@ -12,7 +12,7 @@ import { tryContract } from '../utils/chain_utils'
 export default function Home() {
   const global = useContext(UserContext)
   const router = useRouter()
-  console.log('get on it', global.user)
+  console.log('get on it', global.user);
   if (global.user) {
     router.push('/botconfig')
   }

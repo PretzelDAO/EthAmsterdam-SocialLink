@@ -33,23 +33,16 @@ export default function BotCheck() {
                       overflow-hidden
                       shadow-2xl
                       w-5/6
-                      bg-white
+                      bg-gray-50
                       flex
                       flex-col
                       items-start
-                      space-y-4
                       py-4
                       font-light
                       px-4"
       >
-        <span className="py-3 text-lg">Bot: SocialLink#1224</span>
-        <div className="font-light py-3">
-          {global.profileId ? (
-            <span>{`Your on-chain Profile: ${global.profile[3]} (${global.profileId})`}</span>
-          ) : (
-            'Please enter your on-chain Profile'
-          )}
-        </div>
+        <div className="py-3 text-2xl font-bold mb-0 pb-0">Connect your Social Accounts</div>
+        <div className="py-3 text-sm text-gray-500 mt-0 pt-0">By connecting your socials you can grow your web3 network with minimum effort</div>
         {toshow}
       </div>
     </div>
