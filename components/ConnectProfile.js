@@ -69,7 +69,6 @@ export default function ConnectProfile() {
               <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
-            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -85,20 +84,22 @@ export default function ConnectProfile() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-[60vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-[30vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-thin leading-6 text-gray-900"
+                  className="font-thin leading-6 text-gray-900"
                 >
                   {publication?.title}
                 </Dialog.Title>
-                <div className="mt-2">
-                  <div className="flex flex-col w-full justify-center align-middle items-center">
-                    <div className="w-fit font-normal">Create your handle</div>
+                <div className="mt-2 space-y-4">
+                  <div className="flex flex-col w-full align-middle">
+                    <div className="py-3 font-sans text-lg font-thin">
+                      Connect handle
+                    </div>
                     <div className="flex flex-row ">
                       <img
                         src={`https://robohash.org/${global.user?.address}.png?size=120x120`}
-                        className="w-16 h-16 border-2 rounded-full mr-2 border-hacker-color-200"
+                        className="w-8 h-8 rounded-full mr-2 border-hacker-color-200"
                       />
                       <div className="flex flex-col justify-center items-center">
                         <div>{global.user.address}</div>
@@ -108,27 +109,25 @@ export default function ConnectProfile() {
                   <div className="mb-6">
                     <label
                       htmlFor="message"
-                      className="block mb-2 text-sm font-normal text-gray-900 dark:text-gray-400"
-                    >
-                      Your handle
-                    </label>
+                      className="block mb-2 text-sm text-gray-900 dark:text-gray-400"
+                    ></label>
                     <input
                       id="message"
                       rows="4"
                       value={handle}
                       onChange={(e) => setHandle(e.target.value)}
-                      className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="I am already called..."
+                      className="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Lens handle"
                     ></input>
-                    <div className="mt-3 py-2 ml-3">{error}</div>
+                    <div className="mt-3 ml-3">{error}</div>
                   </div>
                   {loading ? (
-                    <div className="w-16 h-16 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
+                    <div className="w-8 h-8 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
                   ) : (
                     <BLPButton
-                      text={"Connect My Handle!"}
+                      text={"Connect"}
                       clickaction={claimHandle}
-                      className={"min-w-[20%] mt-16"}
+                      className={"min-w-[20%]"}
                     />
                   )}
                 </div>
