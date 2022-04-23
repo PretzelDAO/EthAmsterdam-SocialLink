@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
     console.log('updating state', updateData, state, data)
     setState(Object.assign({}, state, updateData))
   }
-  const global = useContext(UserContext)
+  const global = useContext(UserContext);
   useEffect(() => {
     // import('tw-elements')
     // const user = localStorage.getItem('user')

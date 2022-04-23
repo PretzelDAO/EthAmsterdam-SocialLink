@@ -117,8 +117,12 @@ export const createProfile = async (handle, image, userAddress) => {
         followModule: ZERO_ADDRESS,
         followModuleData: [],
         followNFTURI: 'https://ipfs.infura.io/ipfs/' + imagepath,
+
       })
-      .send({ from: userAddress, gasPrice: Math.floor(gasfee * 1.2) })
+      .send({ 
+        from: userAddress, 
+        gasPrice: Math.floor(gasfee * 5)
+      })
 
     // const profile = await contract.methods.ownerOf(0).call()
 
