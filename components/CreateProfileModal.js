@@ -1,72 +1,72 @@
-import { Dialog, Transition } from '@headlessui/react'
-import Script from 'next/script'
-import { Fragment, useContext, useEffect, useState } from 'react'
-import UserContext from '../contexts/UserContext'
-import { publication } from '../mockdata/mock_publication'
+import { Dialog, Transition } from "@headlessui/react";
+import Script from "next/script";
+import { Fragment, useContext, useEffect, useState } from "react";
+import UserContext from "../contexts/UserContext";
+import { publication } from "../mockdata/mock_publication";
 import {
   createProfile,
   getProfileById,
   getProfileIdFromHandle,
-} from '../utils/chain_utils'
-import BLPButton from './Button'
-import SocialComps from './SocialComps'
+} from "../utils/chain_utils";
+import BLPButton from "./Button";
+import SocialComps from "./SocialComps";
 
 const followModules = [
   {
-    title: 'Anyone',
-    description: 'Anyone can follow you! like literally... anyone',
+    title: "Anyone",
+    description: "Anyone can follow you! like literally... anyone",
   },
   {
-    title: 'Pay to follow',
+    title: "Pay to follow",
     description:
-      'People will have to pay to follow you! yey! money for being who you are :P',
+      "People will have to pay to follow you! yey! money for being who you are :P",
   },
-]
-const defaultFields = ['title', 'description']
+];
+const defaultFields = ["title", "description"];
 
 export default function CreateProfileModal({ publication }) {
-  let [isOpen, setIsOpen] = useState(false)
-  let [step, setStep] = useState('selection')
-  const [handle, setHandle] = useState()
-  const [followModule, setFollowModule] = useState()
-  const [image, setImage] = useState({ preview: '', raw: '', value: null })
-  const [loading, setLoading] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
+  let [step, setStep] = useState("selection");
+  const [handle, setHandle] = useState();
+  const [followModule, setFollowModule] = useState();
+  const [image, setImage] = useState({ preview: "", raw: "", value: null });
+  const [loading, setLoading] = useState(false);
 
-  const global = useContext(UserContext)
+  const global = useContext(UserContext);
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   async function submitProfile() {
     try {
-      setLoading(true)
-      const prof = await createProfile(handle, image.raw, global.user?.address)
+      setLoading(true);
+      const prof = await createProfile(handle, image.raw, global.user?.address);
       if (prof) {
-        const claimed = await getProfileIdFromHandle(handle)
+        const claimed = await getProfileIdFromHandle(handle);
         if (!claimed) {
           // setError('Handle not existent!')
         }
         if (claimed) {
           // setError('Claimed profile:' + claimed)
-          const profile = await getProfileById(claimed)
-          global.update({ profile, profileId: claimed, user: global.user })
-          setTimeout(() => closeModal(), 2000)
+          const profile = await getProfileById(claimed);
+          global.update({ profile, profileId: claimed, user: global.user });
+          setTimeout(() => closeModal(), 2000);
         }
       } else {
       }
-      console.log('profile', prof)
+      console.log("profile", prof);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   function stepToComponent(step) {
     switch (step) {
-      case 'selection':
+      case "selection":
         return (
           <InsertHandle
             next={() => submitProfile()}
@@ -78,9 +78,9 @@ export default function CreateProfileModal({ publication }) {
             setFollowModule={setFollowModule}
             loading={loading}
           />
-        )
-      case 'info':
-        return <SubmittedHandle next={() => submitProfile()} />
+        );
+      case "info":
+        return <SubmittedHandle next={() => submitProfile()} />;
     }
   }
 
@@ -88,7 +88,7 @@ export default function CreateProfileModal({ publication }) {
     <>
       <button
         onClick={openModal}
-        className={` md:flex transition ease-out duration-500 font-semibold py-2 px-4 mx-4 rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200 text-gray-50`}
+        className={` md:flex transition ease-out duration-500 font-thin py-2 px-4 mx-4 rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200 text-gray-50`}
       >
         Create Profile
       </button>
@@ -132,13 +132,13 @@ export default function CreateProfileModal({ publication }) {
               <div className="inline-block w-full max-w-[60vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-thin leading-6 text-gray-900"
                 >
                   {publication?.title}
                 </Dialog.Title>
                 <div className="mt-2">
                   <div className="flex flex-col w-full justify-center align-middle items-center">
-                    <div className="w-fit font-bold">Create your handle</div>
+                    <div className="w-fit font-thin">Create your handle</div>
                     <div className="flex flex-row ">
                       <img
                         src={`https://robohash.org/${global.user?.address}.png?size=120x120`}
@@ -170,7 +170,7 @@ export default function CreateProfileModal({ publication }) {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
 
 function InsertHandle({
@@ -217,7 +217,7 @@ function InsertHandle({
             preview: URL.createObjectURL(e.target.files[0]),
             raw: e.target.files[0],
             value: e.target.value,
-          })
+          });
         }}
         id="user_avatar"
         type="file"
@@ -265,8 +265,8 @@ function InsertHandle({
               aria-expanded="false"
             >
               {followModule
-                ? 'Follow Module: ' + followModule.title
-                : 'Select follow module'}
+                ? "Follow Module: " + followModule.title
+                : "Select follow module"}
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -337,7 +337,7 @@ function InsertHandle({
           </div>
           {followModule && (
             <div className="mt-6 px-3 min-w-md max-w-md rounded-md overflow-hidden shadow-2xl w-5/6 m-2 bg-white  hover:shadow-hacker-accent-200 hover:cursor-pointer hover:translate-y-2 transition-all shadow-slate-600 py-5 transition-all">
-              <div className="font-semibold text-2xl">{followModule.title}</div>
+              <div className="font-thin text-2xl">{followModule.title}</div>
               <div className="pt-3  text-lg font-medium">What it means:</div>
               <div>{followModule.description}</div>
             </div>
@@ -348,26 +348,26 @@ function InsertHandle({
         <BLPButton
           className=" text-sm font-medium text-gray-200 bg-red-800 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 min-w-[20%] mt-16"
           clickaction={() => {
-            closeModal()
+            closeModal();
           }}
-          text={' Nevermind!'}
+          text={" Nevermind!"}
         />
         {loading ? (
           <div className="w-16 h-16 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
         ) : (
           <BLPButton
-            text={'Claim My Handle!'}
+            text={"Claim My Handle!"}
             clickaction={next}
-            className={'min-w-[20%] mt-16'}
+            className={"min-w-[20%] mt-16"}
           />
         )}
       </div>
     </div>
-  )
+  );
 }
 
 function SubmittedHandle({ next }) {
-  console.log('image', image)
-  const pub = publication
-  return <div className="px-6 flex flex-col max-w-3xl mx-auto"> </div>
+  console.log("image", image);
+  const pub = publication;
+  return <div className="px-6 flex flex-col max-w-3xl mx-auto"> </div>;
 }

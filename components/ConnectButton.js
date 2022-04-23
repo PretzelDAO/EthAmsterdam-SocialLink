@@ -14,7 +14,7 @@ export default function ConnectButton() {
   console.log(global.user?.address);
   let button = (
     <button
-      className={` md:flex transition ease-out duration-500 font-semibold py-1 px-4 rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200`}
+      className={` md:flex transition ease-out duration-500 font-normal py-1 px-4 rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200`}
       onClick={async () => requestUserLogin(global)}
     >
       Connect Wallet {global.user}
@@ -23,12 +23,12 @@ export default function ConnectButton() {
   if (global.user) {
     button = (
       <button
-        className={` md:flex transition ease-out duration-500 font-semibold py-0 px-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50 align-middle flex-row items-center`}
+        className={` md:flex transition ease-out duration-500 font-normal py-0 px-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50 align-middle flex-row items-center`}
         onClick={() => {
           console.log("logged in", user);
         }}
       >
-        <div className=" w-12 h-12 rounded-full shadow-lg my-2 bg-white border-2 overflow-hidden">
+        <div className=" w-6 h-6 rounded-full shadow-lg my-2 bg-white border-2 overflow-hidden">
           <img
             className="w-full max-h-sm aspect-square object-cover"
             src={

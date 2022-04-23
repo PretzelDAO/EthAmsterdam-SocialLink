@@ -4,17 +4,17 @@ export default function BLPButton({
   className,
   disabled = false,
 }) {
-  console.log('class', text, className)
+  console.log("class", text, className);
   return (
     <button
       onClick={clickaction}
       disabled={disabled}
       className={
-        `font-semibold py-1 px-4  rounded-lg  text-gray-50 bg-hacker-accent-400 ` +
-        (disabled ? 'opacity-30' : ' hover:bg-hacker-accent-200')
+        `font-thin py-1 px-4  rounded-lg  text-gray-50 bg-hacker-accent-400 ` +
+        (disabled ? "opacity-30" : " hover:bg-hacker-accent-200")
       }
     >
       {text}
     </button>
-  )
+  );
 }

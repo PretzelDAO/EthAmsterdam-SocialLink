@@ -1,42 +1,42 @@
-import { Dialog, Transition } from '@headlessui/react'
-import Script from 'next/script'
-import { Fragment, useContext, useEffect, useState } from 'react'
-import UserContext from '../contexts/UserContext'
-import { publication } from '../mockdata/mock_publication'
-import { getProfileById, getProfileIdFromHandle } from '../utils/chain_utils'
-import BLPButton from './Button'
-import SocialComps from './SocialComps'
+import { Dialog, Transition } from "@headlessui/react";
+import Script from "next/script";
+import { Fragment, useContext, useEffect, useState } from "react";
+import UserContext from "../contexts/UserContext";
+import { publication } from "../mockdata/mock_publication";
+import { getProfileById, getProfileIdFromHandle } from "../utils/chain_utils";
+import BLPButton from "./Button";
+import SocialComps from "./SocialComps";
 
 export default function ConnectProfile() {
-  let [isOpen, setIsOpen] = useState(false)
-  const [handle, setHandle] = useState()
-  const [error, setError] = useState()
-  const [loading, setLoading] = useState(false)
-  const global = useContext(UserContext)
+  let [isOpen, setIsOpen] = useState(false);
+  const [handle, setHandle] = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+  const global = useContext(UserContext);
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   async function claimHandle() {
     try {
-      setLoading(true)
-      const claimed = await getProfileIdFromHandle(handle)
+      setLoading(true);
+      const claimed = await getProfileIdFromHandle(handle);
       if (!claimed) {
-        setError('Handle not existent!')
+        setError("Handle not existent!");
       }
       if (claimed) {
-        setError('Claimed profile:' + claimed)
-        const profile = await getProfileById(claimed)
-        global.update({ profile, profileId: claimed, user: global.user })
-        setTimeout(() => closeModal(), 2000)
+        setError("Claimed profile:" + claimed);
+        const profile = await getProfileById(claimed);
+        global.update({ profile, profileId: claimed, user: global.user });
+        setTimeout(() => closeModal(), 2000);
       }
-      console.log('claiming,', handle, claimed)
+      console.log("claiming,", handle, claimed);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -44,7 +44,7 @@ export default function ConnectProfile() {
     <>
       <button
         onClick={openModal}
-        className={` md:flex transition ease-out duration-500 font-semibold py-2 px-4 mx-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50`}
+        className={` md:flex transition ease-out duration-500 font-thin py-2 px-4 mx-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50`}
       >
         Connect Profile
       </button>
@@ -88,13 +88,13 @@ export default function ConnectProfile() {
               <div className="inline-block w-full max-w-[60vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-thin leading-6 text-gray-900"
                 >
                   {publication?.title}
                 </Dialog.Title>
                 <div className="mt-2">
                   <div className="flex flex-col w-full justify-center align-middle items-center">
-                    <div className="w-fit font-bold">Create your handle</div>
+                    <div className="w-fit font-normal">Create your handle</div>
                     <div className="flex flex-row ">
                       <img
                         src={`https://robohash.org/${global.user?.address}.png?size=120x120`}
@@ -108,7 +108,7 @@ export default function ConnectProfile() {
                   <div className="mb-6">
                     <label
                       htmlFor="message"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                      className="block mb-2 text-sm font-normal text-gray-900 dark:text-gray-400"
                     >
                       Your handle
                     </label>
@@ -126,9 +126,9 @@ export default function ConnectProfile() {
                     <div className="w-16 h-16 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
                   ) : (
                     <BLPButton
-                      text={'Connect My Handle!'}
+                      text={"Connect My Handle!"}
                       clickaction={claimHandle}
-                      className={'min-w-[20%] mt-16'}
+                      className={"min-w-[20%] mt-16"}
                     />
                   )}
                 </div>
@@ -151,5 +151,5 @@ export default function ConnectProfile() {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

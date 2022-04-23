@@ -10,7 +10,7 @@ export default function Header() {
   const [collapsed, setCollapsed] = useState(true);
   const global = useContext(UserContext);
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-hacker-color-200 px-6 w-full lg:sticky lg:top-0 z-10 py-2">
+    <nav className="flex items-center justify-between flex-wrap bg-hacker-color-200 px-6 w-full lg:sticky lg:top-0 z-10 py-2 font-thin">
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto lg:h-auto">
         <div className="text-md lg:flex-grow">
           <Link
@@ -23,23 +23,13 @@ export default function Header() {
             </div>
           </Link>
         </div>
-        <div className="flex items-center font-sans flex-no-shrink text-white mr-6">
+        <div className="flex items-center font-thin flex-no-shrink text-white mr-6">
           <span>Social Link powered by </span>
           <img src={"/images/pretzeldao_white.svg"} className="h-6 px-4" />
         </div>
         {global.user && global.profileId && (
           <div>
             <CreateHackathonModal />
-          </div>
-        )}
-        {global.user && !global.profileId && (
-          <div className="flex flex-row justify-evenly h-full items-center">
-            <div>
-              <CreateProfileModal />
-            </div>
-            <div>
-              <ConnectProfile />
-            </div>
           </div>
         )}
         <div className="lg:m-0 my-2">

@@ -1,15 +1,15 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
 export default function DetailModal({ publication }) {
-  let [isOpen, setIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   return (
@@ -17,7 +17,7 @@ export default function DetailModal({ publication }) {
       <button
         type="button"
         onClick={openModal}
-        className="inline-block   border-gray-300 border-2 rounded-sm px-3 py-1 text-sm font-light text-gray-600 mr-2 mb-2 hover:bg-hacker-accent-200"
+        className="inline-block border-gray-300 border-2 rounded-sm px-3 py-1 text-sm font-light text-gray-600 mr-2 mb-2 hover:bg-hacker-accent-200"
       >
         Read More
       </button>
@@ -86,5 +86,5 @@ export default function DetailModal({ publication }) {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
