@@ -131,13 +131,13 @@ export default function CreateProfileModal({ publication }) {
               <div className="inline-block w-full max-w-[40vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-thin leading-6 text-gray-900"
+                  className="text-lg font-sans font-thin leading-6 text-gray-900"
                 >
                   {publication?.title}
                 </Dialog.Title>
                 <div className="mt-2 space-y-4">
                   <div className="flex flex-col w-full justify-center align-middle">
-                    <div className="py-3 font-sans text-lg front-thin">
+                    <div className="py-3 font-sans font-medium text-xl">
                       Create your handle
                     </div>
                     <div className="flex flex-row ">
@@ -145,26 +145,13 @@ export default function CreateProfileModal({ publication }) {
                         src={`https://robohash.org/${global.user?.address}.png?size=120x120`}
                         className="w-8 h-8 rounded-full mr-2 border-hacker-color-200"
                       />
-                      <div className="flex flex-col justify-center items-center">
+                      <div className="flex flex-col justify-center items-center font-thin">
                         <div>{global.user?.address}</div>
                       </div>
                     </div>
                   </div>
                   {stepToComponent(step)}
                 </div>
-
-                {/* <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-200 bg-red-800 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={() => {
-                      setStep('selection')
-                      closeModal()
-                    }}
-                  >
-                    Nevermind!
-                  </button>
-                </div> */}
               </div>
             </Transition.Child>
           </div>
@@ -187,27 +174,25 @@ function InsertHandle({
   return (
     <div>
       <div className="mb-6">
-        <label
-          htmlFor="message"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-        ></label>
         <input
           id="message"
+          type="text"
           rows="4"
           value={handle}
           onChange={(e) => setHandle(e.target.value)}
-          className="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          autoComplete="off"
+          className="block p-2.5 w-full text-thin text-sm bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Lens handle (can not be changed)"
         ></input>
       </div>
       <label
-        className="text-sm font-light font-sans text-gray-900 block mb-2"
+        className="text-sm font-thin font-sans text-gray-900 block mb-2"
         htmlFor="user_avatar"
       >
         Profile Picture
       </label>
       <input
-        className="block w-full cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-transparent text-sm rounded-lg"
+        className="ml-[-2] lock w-full cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:border-transparent text-sm rounded-lg"
         aria-describedby="user_avatar_help"
         // value={image.value}
         onChange={(e) => {
@@ -250,22 +235,17 @@ function InsertHandle({
           </div>
         </div>
       )}
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-center m-2">
         <BLPButton
-          className=" text-sm font-medium text-gray-200 bg-red-800 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 min-w-[20%] mt-16"
           clickaction={() => {
             closeModal();
           }}
           text={" Nevermind!"}
         />
         {loading ? (
-          <div className="w-8 h-8 border-b-2 border-hacker-color-200 rounded-full animate-spin"></div>
+          <div className=""></div>
         ) : (
-          <BLPButton
-            text={"Claim My Handle!"}
-            clickaction={next}
-            className={"min-w-[20%]"}
-          />
+          <BLPButton text={"Claim My Handle!"} clickaction={next} />
         )}
       </div>
     </div>

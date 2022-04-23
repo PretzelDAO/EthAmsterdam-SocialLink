@@ -44,7 +44,7 @@ export default function ConnectProfile() {
     <>
       <button
         onClick={openModal}
-        className={` md:flex transition ease-out duration-500 font-thin py-2 px-4 mx-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50`}
+        className={` md:flex transition ease-out duration-500 font-sans font-thin py-2 px-4 mx-4 rounded-lg bg-hacker-accent-600 hover:bg-hacker-accent-200 text-gray-50`}
       >
         Connect Profile
       </button>
@@ -87,7 +87,7 @@ export default function ConnectProfile() {
               <div className="inline-block w-full max-w-[30vw] p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="font-thin leading-6 text-gray-900"
+                  className="font-thin font-sans leading-6 text-gray-900"
                 >
                   {publication?.title}
                 </Dialog.Title>
