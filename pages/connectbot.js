@@ -4,7 +4,6 @@ import UserContext from '../contexts/UserContext'
 import { registerRelayer } from '../utils/api'
 import { setProfileLensDispatcher } from '../utils/chain_utils'
 
-const sharedAccount = '0xef2555B767cE62Ef22eA8289b3AC34D25DBba30f'
 export default function BotCheck() {
   // const [handle, setHandle] = useState()
   const router = useRouter()

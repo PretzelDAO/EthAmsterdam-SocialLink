@@ -3,7 +3,7 @@ import UserContext from '../contexts/UserContext'
 import { setProfileLensDispatcher } from '../utils/chain_utils'
 import BLPButton from './Button'
 
-const sharedAccountContract = '0x7A97f733078C2DBe01c4638374dd047D2dABAd36'
+const sharedAccountContract = '0xe240C29dba4Cc71Bc1206093c4a8E1B216f7f7bb'
 export default function SocialProfileCard({ icon, link, state }) {
   const global = useContext(UserContext)
   return (
