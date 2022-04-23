@@ -1,11 +1,17 @@
-export default function BLPButton({ clickaction, text, className }) {
+export default function BLPButton({
+  clickaction,
+  text,
+  className,
+  disabled = false,
+}) {
   console.log('class', text, className)
   return (
     <button
       onClick={clickaction}
+      disabled={disabled}
       className={
-        `font-semibold py-3 px-4  rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200 text-gray-50 ` +
-        (className ? className : '')
+        `font-semibold py-3 px-4  rounded-lg  text-gray-50 bg-hacker-accent-400 ` +
+        (disabled ? 'opacity-30' : ' hover:bg-hacker-accent-200')
       }
     >
       {text}

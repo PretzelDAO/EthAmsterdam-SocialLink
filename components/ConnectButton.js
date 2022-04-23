@@ -17,7 +17,7 @@ export default function ConnectButton() {
       className={` md:flex transition ease-out duration-500 font-semibold py-3 px-4 rounded-lg bg-hacker-accent-400 hover:bg-hacker-accent-200`}
       onClick={async () => requestUserLogin(global)}
     >
-      Connect {global.user}
+      Connect Wallet {global.user}
     </button>
   )
   if (global.user) {

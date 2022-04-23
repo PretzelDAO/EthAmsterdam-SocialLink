@@ -44,7 +44,7 @@ export default function CreateProfileModal({ publication }) {
   async function submitProfile() {
     try {
       setLoading(true)
-      const prof = await createProfile(handle, image.raw, global.user.address)
+      const prof = await createProfile(handle, image.raw, global.user?.address)
       if (prof) {
         const claimed = await getProfileIdFromHandle(handle)
         if (!claimed) {
@@ -145,7 +145,7 @@ export default function CreateProfileModal({ publication }) {
                         className="w-16 h-16 border-2 rounded-full mr-2 border-hacker-color-200"
                       />
                       <div className="flex flex-col justify-center items-center">
-                        <div>{global.user.address}</div>
+                        <div>{global.user?.address}</div>
                       </div>
                     </div>
                   </div>

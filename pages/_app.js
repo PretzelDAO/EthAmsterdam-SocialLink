@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import UserContext from '../contexts/UserContext'
 import '../styles/globals.css'
+import styles from '../styles/Home.module.css'
 
 function MyApp({ Component, pageProps }) {
   const [state, setState] = useState({
@@ -46,6 +47,15 @@ function MyApp({ Component, pageProps }) {
           <div className="max-w-7xl w-full px-5">
             <Component {...pageProps} className="w-screen" />
           </div>
+          <footer className={styles.footer}>
+            <a
+              href="https://pretzeldao.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Powered by PretzelDAO
+            </a>
+          </footer>
         </div>
       </div>
     </UserContext.Provider>
