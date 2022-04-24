@@ -64,14 +64,14 @@ export const getProfileIdFromHandle = async (handle) => {
 }
 
 export const getProfileById = async (id) => {
-  const contract = getWeb3Contract(sharedAccountContract, LENSHUB_ABI)
+  const contract = getWeb3Contract(contract_address, LENSHUB_ABI)
   try {
     const profile = await contract.methods.getProfile(id).call()
     console.log('got ', profile, ' for', id)
     if (profile == 0) return null
     return profile
   } catch (e) {
-    console.log('cannot handle', handle)
+    console.log('cannot handle', id)
     return null
   }
 }

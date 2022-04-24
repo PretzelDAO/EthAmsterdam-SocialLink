@@ -28,9 +28,9 @@ export default function ConnectProfile() {
   //   },[]
   // )
   let profiles = []
-  if (global.user) {
-    getProfileById()
-  }
+  // if (global.user) {
+  //   getProfileById()
+  // }
   async function claimHandle() {
     try {
       setLoading(true)

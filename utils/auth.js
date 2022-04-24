@@ -65,7 +65,9 @@ const saveToLocalStorage = (key, data) => {
 
 const readFromLocalStorage = (key) => {
   window.dispatchEvent(new Event('storage'))
-  return JSON.parse(localStorage.getItem(key))
+  const item = localStorage.getItem(key)
+  if (item) return JSON.parse(item)
+  return null
 }
 
 ////preference saving
